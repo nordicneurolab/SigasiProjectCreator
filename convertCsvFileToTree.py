@@ -15,7 +15,7 @@ from SigasiProjectCreator import SigasiProjectCreator
 
 def parse_csv_file(csv_file):
     entries = dict()
-    with open(csv_file, 'rb') as f:
+    with open(csv_file, 'r') as f:
         reader = csv.reader(f,skipinitialspace=True)
         for row in reader:
             library = row[0]
@@ -59,7 +59,7 @@ example: %prog filelist.csv
     sigasProjectFileCreator.unmap("/")
 
     linkedFolders = dict()
-    for path, library in entries.iteritems():
+    for path, library in entries.items():
         abs_destination = os.path.abspath(destination)
         abs_path = os.path.abspath(path)
         relativePath = os.path.relpath(abs_path, abs_destination)
@@ -88,7 +88,7 @@ example: %prog filelist.csv
         location = location.replace('\\','/')
         return location
 
-    for folder, location in linkedFolders.iteritems():
+    for folder, location in linkedFolders.items():
         if runningInCygWin():
             location = convertCygwinPath(location)
         sigasProjectFileCreator.add_link(folder, location, 2)
